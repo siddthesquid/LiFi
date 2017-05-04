@@ -1,16 +1,16 @@
-function pixArray = ArrayToImage(array)
-    im = imread(imageName);
-    rows = size(im,1);
-    cols = size(im,2);
+function arrFromImage = ArrayToImage(arr, rows, cols)
+    %what to store the image in
+    zeroim = zeros(rows, cols, 3);
+    %each row in out is a b, g, r, 0 in that order, repeating
+    out = reshape(arr, [8 10000])';
+    outnum = bi2de(out);
+    b = outnum(1:4:end,:);
+    b = uint8(reshape(b, [rows cols]))';
+    g = outnum(2:4:end,:);
+    g = uint8(reshape(g, [rows cols]))';
+    r = outnum(3:4:end,:);
+    r = uint8(reshape(r, [rows cols]))';
+    img = cat(3, r, g, b);
+    image(img);
     
-    r = im(:,:,1);
-    g = im(:,:,2);
-    b = im(:,:,3);
-    
-    datasize = 1;
-    combined = uint32(r) * datasize * datasize + uint32(g) * datasize + uint32(b);
-    
-    flat = reshape(combined', [1 rows * cols]);
-    binrep = de2bi(flat,32);
-    pixArray = logical(reshape(binrep', [1 rows * cols * 32]));
 end
