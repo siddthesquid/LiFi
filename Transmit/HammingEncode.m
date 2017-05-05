@@ -1,5 +1,8 @@
 function padded = HammingEncode(arr)
 zeropad = 120-mod(length(arr), 120);
+if zeropad == 120
+    zeropad = 0
+end
 arr = [arr zeros(1, zeropad)];
 padded = [];
 
