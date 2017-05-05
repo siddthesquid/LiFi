@@ -18,3 +18,4 @@ nonparbits = floor(log2(1:length(array)))~= log2(1:length(array));
 corrected = array(nonparbits); 
 
 end
+
